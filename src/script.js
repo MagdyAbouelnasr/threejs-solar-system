@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Pane } from "tweakpane";
+const BASE = import.meta.env.BASE_URL; 
 
 // initialize pane
 const pane = new Pane();
@@ -10,24 +11,31 @@ const scene = new THREE.Scene();
 
 // add textureLoader
 const textureLoader = new THREE.TextureLoader();
-const cubeTextureLoader = new THREE.CubeTextureLoader()
-cubeTextureLoader.setPath('/textures/cubeMap/')
 
-// adding textures
-const sunTexture = textureLoader.load("/textures/2k_sun.jpg");
-sunTexture.colorSpace = THREE.SRGBColorSpace  
-const mercuryTexture = textureLoader.load("/textures/2k_mercury.jpg");
-mercuryTexture.colorSpace = THREE.SRGBColorSpace
-const venusTexture = textureLoader.load("/textures/2k_venus_surface.jpg");
-venusTexture.colorSpace = THREE.SRGBColorSpace
-const earthTexture = textureLoader.load("/textures/2k_earth_daymap.jpg");
-earthTexture.colorSpace = THREE.SRGBColorSpace
-const marsTexture = textureLoader.load("/textures/2k_mars.jpg");
-marsTexture.colorSpace = THREE.SRGBColorSpace
-const moonTexture = textureLoader.load("/textures/2k_moon.jpg");
-moonTexture.colorSpace = THREE.SRGBColorSpace
+const cubeTextureLoader = new THREE.CubeTextureLoader();
+cubeTextureLoader.setPath(`${BASE}cubeMap/`); // ✅ no leading "/"
 
-const backgroundCubemap = cubeTextureLoader
+// textures (✅ no leading "/")
+const sunTexture = textureLoader.load(`${BASE}textures/2k_sun.jpg`);
+sunTexture.colorSpace = THREE.SRGBColorSpace;
+
+const mercuryTexture = textureLoader.load(`${BASE}textures/2k_mercury.jpg`);
+mercuryTexture.colorSpace = THREE.SRGBColorSpace;
+
+const venusTexture = textureLoader.load(`${BASE}textures/2k_venus_surface.jpg`);
+venusTexture.colorSpace = THREE.SRGBColorSpace;
+
+const earthTexture = textureLoader.load(`${BASE}textures/2k_earth_daymap.jpg`);
+earthTexture.colorSpace = THREE.SRGBColorSpace;
+
+const marsTexture = textureLoader.load(`${BASE}textures/2k_mars.jpg`);
+marsTexture.colorSpace = THREE.SRGBColorSpace;
+
+const moonTexture = textureLoader.load(`${BASE}textures/2k_moon.jpg`);
+moonTexture.colorSpace = THREE.SRGBColorSpace;
+
+
+const backgroundCubemap = cubeTextureLoader.setPath(`${BASE}textures/cubeMap/`)
 .load( [
   'px.png',
   'nx.png',
